@@ -3,14 +3,21 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 import selfcheckout_ui
+import scanedform_ui
 import requests
 import os
 
 style = os.path.join(os.path.dirname(__file__), 'style.css')
 
-class myMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
+class MyDialog(QDialog, scanedform_ui.Ui_Dialog):
+    def __init__(self, parent_object):
+        super(MyDialog, self).__init__(parent_object)
+        self.scannedGood = None
+        self.setupUi(self)
+
+class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def __init__(self):
-        super(myMainWindow, self).__init__()
+        super(MyMainWindow, self).__init__()
         self.goods = []
         self.discountGoods = [
             {
@@ -94,10 +101,14 @@ class myMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.discountPushButton7.clicked.connect(self.clickDiscountButton7)
         self.discountPushButton8.clicked.connect(self.clickDiscountButton8)
         self.discountPushButton9.clicked.connect(self.clickDiscountButton9)
+        self.favoritesPushButton.clicked.connect(self.openScannedDialog)
         self.getGoods()
         self.centralwidget.showFullScreen()
         # self.showFullScreen()
 
+    def openScannedDialog(self):
+        self.scannedDialog = MyDialog(self)
+        self.scannedDialog.exec_()
 
     def clickStartButton(self):
         self.stackedWidget.setCurrentIndex(1)
@@ -198,14 +209,24 @@ class myMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def addGood(self, barcode):
         selected = [t for t in self.all_goods if t['barcode'] == barcode]
         if len(selected) > 0:
-            self.goods.append(selected[0])
-            self.shopingCartListWidget.addItem(selected[0]['name'])
-        print self.goods
+            scanedGood = selected[0]
+            self.scannedDialog = MyDialog(self)
+            self.scannedGood = scanedGood
+            self.scannedDialog.scanedGoodNameLabel.setText(scanedGood['name'])
+            self.scannedDialog.scanedGoodPriceLabel.setText('price')
+            self.scannedDialog.scanedGoodDescriptionLabel.setText('description')
+            self.scannedDialog.scanedGoodExpirationLabel.setText('expiration')
+            self.scannedDialog.scanedGoodImageLabel.setPixmap(QPixmap('/home/tk/PycharmProjects/SelfCheckoutOnGo/app/static/upload/wares/1/1.jpg'))
+            self.scannedDialog.show()
+
+            # self.goods.append(selected[0])
+            # self.shopingCartListWidget.addItem(selected[0]['name'])
+        # print self.goods
 
 
 if __name__ == '__main__':
     app = QApplication([])
-    w = myMainWindow()
+    w = MyMainWindow()
 
     w.setWindowFlags(Qt.Window | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
     w.show()
