@@ -17,12 +17,13 @@ class MyDialog(QWidget, scanedform_ui.Ui_Dialog):
         self.cancelPushButton.clicked.connect(self.closeDialog)
 
     def closeDialog(self):
-        self.close()
+        self.hide()
 
 class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def __init__(self):
         super(MyMainWindow, self).__init__()
         self.goods = []
+        self.scannedGood = None
         self.discountGoods = [
             {
                 'image': '',
@@ -91,6 +92,9 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.setupUi(self)
         self.setStyleSheet(open(style).read())
         self.stackedWidget.setCurrentIndex(0)
+        self.scannedDialog = MyDialog(self)
+        self.scannedDialog.hide()
+
         self.startButton.clicked.connect(self.clickStartButton)
         self.findPushButton.clicked.connect(self.clickFindButton)
         self.delPushButton.clicked.connect(self.clickDelButton)
@@ -106,6 +110,8 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.discountPushButton8.clicked.connect(self.clickDiscountButton8)
         self.discountPushButton9.clicked.connect(self.clickDiscountButton9)
         self.favoritesPushButton.clicked.connect(self.openScannedDialog)
+        self.proceedPushButton.clicked.connect(self.clickProceedButton)
+        self.cartPushButton.clicked.connect(self.clickCartButton)
         self.getGoods()
         self.centralwidget.showFullScreen()
         # self.showFullScreen()
@@ -117,6 +123,15 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def clickStartButton(self):
         self.stackedWidget.setCurrentIndex(1)
         self.stackedWidget_2.setCurrentIndex(0)
+        self.stackedWidget_3.setCurrentIndex(0)
+
+    def clickProceedButton(self):
+        self.stackedWidget.setCurrentIndex(0)
+        self.shopingCartListWidget.clear()
+        self.goods = []
+
+    def clickCartButton(self):
+        self.stackedWidget_3.setCurrentIndex(1)
 
     def clickFindButton(self):
         self.setStyleSheet(open(style).read())
@@ -138,7 +153,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             selected_item = self.goods[selected_index]
             self.nameGoodLabel.setText(selected_item['name'])
             # self.descriptionGoodLabel.setText(selected_item['description'])
-            # self.expirationGoodLabel.setText(selected_item['expiration'])
+            # self.expirationGoodLabel.setText('Until ' + selected_item['expiration'])
             self.descriptionGoodLabel.setText(selected_item['name'])
             self.expirationGoodLabel.setText(selected_item['name'])
             self.imageGoodLabel.setPixmap(QPixmap('/home/tk/PycharmProjects/SelfCheckoutOnGo/app/static/upload/wares/1/1.jpg'))
@@ -214,7 +229,6 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         selected = [t for t in self.all_goods if t['barcode'] == barcode]
         if len(selected) > 0:
             scanedGood = selected[0]
-            self.scannedDialog = MyDialog(self)
             self.scannedGood = scanedGood
             self.scannedDialog.scanedGoodNameLabel.setText(scanedGood['name'])
             self.scannedDialog.scanedGoodPriceLabel.setText('price')
