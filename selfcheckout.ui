@@ -262,6 +262,9 @@
                           <property name="text">
                            <string>TextLabel</string>
                           </property>
+                          <property name="wordWrap">
+                           <bool>true</bool>
+                          </property>
                          </widget>
                         </item>
                         <item>
@@ -298,7 +301,10 @@
                          <string/>
                         </property>
                         <property name="scaledContents">
-                         <bool>true</bool>
+                         <bool>false</bool>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
                         </property>
                        </widget>
                       </item>
@@ -435,7 +441,10 @@ From Cart</string>
                               <pixmap>images/991.jpg</pixmap>
                              </property>
                              <property name="scaledContents">
-                              <bool>true</bool>
+                              <bool>false</bool>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
                              </property>
                             </widget>
                             <widget class="QLabel" name="discountPriceLabel1">
@@ -552,7 +561,10 @@ From Cart</string>
                               <pixmap>images/9402-bananas.jpg</pixmap>
                              </property>
                              <property name="scaledContents">
-                              <bool>true</bool>
+                              <bool>false</bool>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
                              </property>
                             </widget>
                             <widget class="QLabel" name="discountPriceLabel2">
@@ -656,7 +668,10 @@ From Cart</string>
                               <pixmap>images/salami.jpg</pixmap>
                              </property>
                              <property name="scaledContents">
-                              <bool>true</bool>
+                              <bool>false</bool>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
                              </property>
                             </widget>
                             <widget class="QLabel" name="discountPriceLabel3">
@@ -741,7 +756,10 @@ From Cart</string>
                               <pixmap>images/FrenchBaguette.jpg</pixmap>
                              </property>
                              <property name="scaledContents">
-                              <bool>true</bool>
+                              <bool>false</bool>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
                              </property>
                             </widget>
                             <widget class="QLabel" name="discountPriceLabel4">
@@ -842,7 +860,10 @@ From Cart</string>
                               <pixmap>images/img-fiche-silver-sardine-huile-vegetale.png</pixmap>
                              </property>
                              <property name="scaledContents">
-                              <bool>true</bool>
+                              <bool>false</bool>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
                              </property>
                             </widget>
                             <widget class="QLabel" name="discountPriceLabel5">
@@ -943,7 +964,10 @@ From Cart</string>
                               <pixmap>images/Lemon_easter_biscuits_hero_1d74c01d.jpg</pixmap>
                              </property>
                              <property name="scaledContents">
-                              <bool>true</bool>
+                              <bool>false</bool>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
                              </property>
                             </widget>
                             <widget class="QLabel" name="discountPriceLabel6">
@@ -1035,9 +1059,9 @@ From Cart</string>
                             <widget class="QLabel" name="discountImageLabel7">
                              <property name="geometry">
                               <rect>
-                               <x>60</x>
+                               <x>40</x>
                                <y>20</y>
-                               <width>31</width>
+                               <width>81</width>
                                <height>51</height>
                               </rect>
                              </property>
@@ -1048,7 +1072,7 @@ From Cart</string>
                               <pixmap>images/liquor-bottle-IARzFh-clipart.jpg</pixmap>
                              </property>
                              <property name="scaledContents">
-                              <bool>true</bool>
+                              <bool>false</bool>
                              </property>
                              <property name="alignment">
                               <set>Qt::AlignCenter</set>
@@ -1152,7 +1176,10 @@ From Cart</string>
                               <pixmap>images/marinated-tomatoes-with-garlic.jpg</pixmap>
                              </property>
                              <property name="scaledContents">
-                              <bool>true</bool>
+                              <bool>false</bool>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
                              </property>
                             </widget>
                             <widget class="QLabel" name="discountPriceLabel8">
@@ -1253,7 +1280,10 @@ From Cart</string>
                               <pixmap>images/Swiss_Cheese_Garden_of_Eden_jpg.jpg</pixmap>
                              </property>
                              <property name="scaledContents">
-                              <bool>true</bool>
+                              <bool>false</bool>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignCenter</set>
                              </property>
                             </widget>
                             <widget class="QLabel" name="discountPriceLabel9">

@@ -44,27 +44,118 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QPushButton" name="verifyPushButton">
-          <property name="font">
-           <font>
-            <pointsize>20</pointsize>
-           </font>
+         <widget class="QStackedWidget" name="buttonsStackedWidget">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>59</height>
+           </size>
           </property>
-          <property name="text">
-           <string>Put into Cart to Verify</string>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>59</height>
+           </size>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="cancelPushButton">
-          <property name="font">
-           <font>
-            <pointsize>20</pointsize>
-           </font>
+          <property name="currentIndex">
+           <number>2</number>
           </property>
-          <property name="text">
-           <string>Cancel</string>
-          </property>
+          <widget class="QWidget" name="page">
+           <widget class="QPushButton" name="verifyPushButton">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>10</y>
+              <width>391</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Put into Cart to Verify</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="cancelPushButton">
+            <property name="geometry">
+             <rect>
+              <x>394</x>
+              <y>10</y>
+              <width>161</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Cancel</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="page_2">
+           <widget class="QPushButton" name="verifyPushButton2">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>10</y>
+              <width>391</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Not Verified, Try Once</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="cancelPushButton2">
+            <property name="geometry">
+             <rect>
+              <x>394</x>
+              <y>10</y>
+              <width>161</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Cancel</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QWidget" name="page_3">
+           <widget class="QPushButton" name="cancelPushButton3">
+            <property name="geometry">
+             <rect>
+              <x>4</x>
+              <y>10</y>
+              <width>553</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Verified</string>
+            </property>
+           </widget>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -76,7 +167,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>300</height>
+            <height>280</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -92,7 +183,7 @@
            <pixmap>images/9402-bananas.jpg</pixmap>
           </property>
           <property name="scaledContents">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
