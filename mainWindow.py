@@ -9,11 +9,15 @@ import os
 
 style = os.path.join(os.path.dirname(__file__), 'style.css')
 
-class MyDialog(QDialog, scanedform_ui.Ui_Dialog):
+class MyDialog(QWidget, scanedform_ui.Ui_Dialog):
     def __init__(self, parent_object):
         super(MyDialog, self).__init__(parent_object)
         self.scannedGood = None
         self.setupUi(self)
+        self.cancelPushButton.clicked.connect(self.closeDialog)
+
+    def closeDialog(self):
+        self.close()
 
 class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def __init__(self):
@@ -217,6 +221,8 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             self.scannedDialog.scanedGoodDescriptionLabel.setText('description')
             self.scannedDialog.scanedGoodExpirationLabel.setText('expiration')
             self.scannedDialog.scanedGoodImageLabel.setPixmap(QPixmap('/home/tk/PycharmProjects/SelfCheckoutOnGo/app/static/upload/wares/1/1.jpg'))
+            self.scannedDialog.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
+            self.scannedDialog.move(400, 400)
             self.scannedDialog.show()
 
             # self.goods.append(selected[0])
