@@ -1,0 +1,28 @@
+QPushButton#startButton {
+    border: none;
+    border-radius: 16px;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #3498db, stop: 1 #2980b9);
+    color: #ffffff;
+    padding: 19px 20px 19px 20px;
+    text-decoration: none;
+    font-family: Arial;
+    font-size: 27px;
+}
+
+QPushButton#startButton:hover {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #3cb0fd, stop: 1 #3498db);
+}
+
+QGroupBox#discountGroupBox QFrame {
+    background-color: white;
+}
+
+QGroupBox#discountGroupBox QPushButton,
+QGroupBox#discountGroupBox QPushButton:flat,
+QGroupBox#discountGroupBox QPushButton:pressed,
+QGroupBox#discountGroupBox QPushButton:checked {
+    background-color: transparent;
+    border: none;
+}
