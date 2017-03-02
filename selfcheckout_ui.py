@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'selfcheckout.ui'
 #
-# Created: Thu Mar  2 14:35:03 2017
+# Created: Thu Mar  2 15:45:54 2017
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,12 +12,16 @@ from PySide import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1366, 768)
+        MainWindow.resize(1369, 768)
+        MainWindow.setMaximumSize(QtCore.QSize(1369, 768))
+        MainWindow.setBaseSize(QtCore.QSize(1366, 768))
         self.centralwidget = QtGui.QWidget(MainWindow)
+        self.centralwidget.setMaximumSize(QtCore.QSize(16777215, 768))
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_5 = QtGui.QVBoxLayout(self.centralwidget)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.stackedWidget = QtGui.QStackedWidget(self.centralwidget)
+        self.stackedWidget.setMaximumSize(QtCore.QSize(16777215, 745))
         self.stackedWidget.setObjectName("stackedWidget")
         self.startPage = QtGui.QWidget()
         self.startPage.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -32,7 +36,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QtGui.QHBoxLayout(self.groupBox)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label_2 = QtGui.QLabel(self.groupBox)
-        self.label_2.setMinimumSize(QtCore.QSize(645, 581))
+        self.label_2.setMinimumSize(QtCore.QSize(645, 500))
         font = QtGui.QFont()
         font.setPointSize(42)
         self.label_2.setFont(font)
@@ -45,7 +49,7 @@ class Ui_MainWindow(object):
         self.line.setObjectName("line")
         self.horizontalLayout.addWidget(self.line)
         self.label = QtGui.QLabel(self.groupBox)
-        self.label.setMinimumSize(QtCore.QSize(645, 581))
+        self.label.setMinimumSize(QtCore.QSize(645, 500))
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap("images/QR-code-ATA_transparent.png"))
         self.label.setScaledContents(False)
@@ -81,7 +85,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_4 = QtGui.QVBoxLayout()
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.mapGroupBox = QtGui.QGroupBox(self.workPage)
-        self.mapGroupBox.setMinimumSize(QtCore.QSize(0, 370))
+        self.mapGroupBox.setMinimumSize(QtCore.QSize(0, 355))
         self.mapGroupBox.setTitle("")
         self.mapGroupBox.setObjectName("mapGroupBox")
         self.horizontalLayout_8 = QtGui.QHBoxLayout(self.mapGroupBox)
@@ -204,8 +208,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12.addWidget(self.frame)
         self.frame_2 = QtGui.QFrame(self.discountGroupBox)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(152)
-        sizePolicy.setVerticalStretch(90)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
         self.frame_2.setSizePolicy(sizePolicy)
         self.frame_2.setMinimumSize(QtCore.QSize(152, 90))
