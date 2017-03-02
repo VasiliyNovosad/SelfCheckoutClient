@@ -95,6 +95,9 @@ class myMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.discountPushButton8.clicked.connect(self.clickDiscountButton8)
         self.discountPushButton9.clicked.connect(self.clickDiscountButton9)
         self.getGoods()
+        self.centralwidget.showFullScreen()
+        # self.showFullScreen()
+
 
     def clickStartButton(self):
         self.stackedWidget.setCurrentIndex(1)
@@ -203,6 +206,8 @@ class myMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
 if __name__ == '__main__':
     app = QApplication([])
     w = myMainWindow()
+
+    w.setWindowFlags(Qt.Window | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
     w.show()
     # w.showFullScreen()
     app.exec_()
