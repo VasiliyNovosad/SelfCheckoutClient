@@ -57,6 +57,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def __init__(self):
         super(MyMainWindow, self).__init__()
         self.goods = []
+        self.foundedGoods = []
         self.discountGoods = [
             {
                 'image': 'images/991.jpg',
@@ -143,6 +144,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.delPushButton.clicked.connect(self.clickDelButton)
         self.barcodeLineEdit.editingFinished.connect(self.changeBarcode)
         self.shopingCartListWidget.itemClicked.connect(self.showProductInfo)
+        self.foundedListWidget.itemClicked.connect(self.showFoundedProductInfo)
         self.discountPushButton1.clicked.connect(self.clickDiscountButton1)
         self.discountPushButton2.clicked.connect(self.clickDiscountButton2)
         self.discountPushButton3.clicked.connect(self.clickDiscountButton3)
@@ -155,6 +157,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.favoritesPushButton.clicked.connect(self.openScannedDialog)
         self.proceedPushButton.clicked.connect(self.clickProceedButton)
         self.cartPushButton.clicked.connect(self.clickCartButton)
+        self.findLineEdit.textChanged.connect(self.foundLineTextEdited)
         self.getGoods()
         self.discountImageLabel1.setPixmap(
             QPixmap(self.discountGoods[0]['image']).scaled(self.discountImageLabel1.width(), self.discountImageLabel1.height(),
@@ -232,6 +235,17 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             self.descriptionGoodLabel.setText(selected_item['description'])
             self.expirationGoodLabel.setText('Until ' + selected_item['expiration'])
             img = QPixmap(selected_item['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio)
+            self.imageGoodLabel.setPixmap(img)
+
+    def showFoundedProductInfo(self):
+        selected_index = self.foundedListWidget.currentRow()
+        if selected_index >= 0:
+            selected_item = self.foundedGoods[selected_index]
+            self.nameGoodLabel.setText(selected_item['name'])
+            self.descriptionGoodLabel.setText(selected_item['description'])
+            self.expirationGoodLabel.setText('Until ' + selected_item['expiration'])
+            img = QPixmap(selected_item['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(),
+                                                         Qt.KeepAspectRatio)
             self.imageGoodLabel.setPixmap(img)
 
     def clickDiscountButton1(self):
@@ -344,6 +358,21 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             self.goods[-1]['count'] = 1
             self.shopingCartListWidget.addItem(scannedGood['name'] + ': ' + str(scannedGood['price']) + u"€" + ' x 1 = ' + str(scannedGood['price']) + u"€")
         self.updateTotal()
+
+    def foundLineTextEdited(self):
+        self.found_goods(self.findLineEdit.text())
+
+    def found_goods(self, found_filter):
+        if found_filter == '':
+            self.foundedGoods = []
+            self.foundedListWidget.clear()
+        else:
+            self.foundedGoods = [t for t in self.all_goods if t['name'].lower().find(found_filter.lower()) >= 0]
+            self.foundedListWidget.clear()
+            for good in self.foundedGoods:
+                itm = QListWidgetItem(good['name'] + '    ' + str(good['price']) + u"€")
+                itm.setIcon(QIcon(good['image']))
+                self.foundedListWidget.addItem(itm)
 
 
 if __name__ == '__main__':
