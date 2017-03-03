@@ -1,1 +1,5 @@
 .idea
+mainWindow.spec
+build
+dist
+images/tmp_frame.jpg
