@@ -4,6 +4,7 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 import selfcheckout_ui
 import scanedform_ui
+import myTouchWidget
 import requests
 import os
 import cv2
@@ -30,8 +31,8 @@ class MyDialog(QWidget, scanedform_ui.Ui_Dialog):
         barcode = self.scannedGood['barcode']
         if self.verifiedGood(barcode):
             self.buttonsStackedWidget.setCurrentIndex(2)
-            self.parent().goods.append(self.scannedGood)
-            self.parent().shopingCartListWidget.addItem(self.scannedGood['name'])
+
+            self.parent().add_good_to_cart(self.scannedGood)
 
         else:
             self.buttonsStackedWidget.setCurrentIndex(1)
@@ -56,7 +57,6 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def __init__(self):
         super(MyMainWindow, self).__init__()
         self.goods = []
-        self.scannedGood = None
         self.discountGoods = [
             {
                 'image': 'images/991.jpg',
@@ -132,6 +132,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             }
         ]
         self.setupUi(self)
+        # self.barcodeLineEdit.keyboard_type = 'numeric'
         self.setStyleSheet(open(style).read())
         self.stackedWidget.setCurrentIndex(0)
         self.scannedDialog = MyDialog(self)
@@ -198,6 +199,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(0)
         self.shopingCartListWidget.clear()
         self.goods = []
+        self.updateTotal()
 
     def clickCartButton(self):
         self.stackedWidget_3.setCurrentIndex(1)
@@ -214,6 +216,13 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             item = self.shopingCartListWidget.takeItem(selected_item)
             item = None
             self.goods.pop(selected_item)
+        self.updateTotal()
+
+    def updateTotal(self):
+        total = 0
+        for good in self.goods:
+            total += good['price'] * good['count']
+        self.shopingCartTotalSumLabel.setText(str(total) + u"€")
 
     def showProductInfo(self):
         selected_index = self.shopingCartListWidget.currentRow()
@@ -300,7 +309,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             scanedGood = selected[0]
             self.scannedDialog.scannedGood = scanedGood
             self.scannedDialog.scanedGoodNameLabel.setText(scanedGood['name'])
-            self.scannedDialog.scanedGoodPriceLabel.setText(str(scanedGood['price']) + '€')
+            self.scannedDialog.scanedGoodPriceLabel.setText(str(scanedGood['price']) + u"€")
             self.scannedDialog.scanedGoodDescriptionLabel.setText(scanedGood['description'])
             self.scannedDialog.scanedGoodExpirationLabel.setText(scanedGood['expiration'])
             self.scannedDialog.scanedGoodImageLabel.setPixmap(
@@ -315,6 +324,26 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             # self.goods.append(selected[0])
             # self.shopingCartListWidget.addItem(selected[0]['name'])
         # print self.goods
+
+    def add_good_to_cart(self, scannedGood):
+        ind = 0
+        flag = False
+        founded = 0
+        for good in self.goods:
+            if good['barcode'] == scannedGood['barcode']:
+                flag = True
+                founded = ind
+            ind += 1
+        if flag:
+            self.goods[founded]['count'] += 1
+            self.shopingCartListWidget.clear()
+            for good in self.goods:
+                self.shopingCartListWidget.addItem(good['name'] + ': ' + str(good['price']) + u"€" + ' x ' + str(good['count']) + ' = ' + str(good['count'] * good['price']) + u"€")
+        else:
+            self.goods.append(scannedGood)
+            self.goods[-1]['count'] = 1
+            self.shopingCartListWidget.addItem(scannedGood['name'] + ': ' + str(scannedGood['price']) + u"€" + ' x 1 = ' + str(scannedGood['price']) + u"€")
+        self.updateTotal()
 
 
 if __name__ == '__main__':
