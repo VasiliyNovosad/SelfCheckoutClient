@@ -1,4 +1,4 @@
-QPushButton#startButton {
+QPushButton {
     border: none;
     border-radius: 16px;
     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
@@ -15,14 +15,31 @@ QPushButton#startButton:hover {
                                       stop: 0 #3cb0fd, stop: 1 #3498db);
 }
 
-QGroupBox#discountGroupBox QFrame {
+QStackedWidget#stackedWidget, QGroupBox#discountGroupBox QFrame, QGroupBox#productInfoGroupBox {
     background-color: white;
+}
+
+QStackedWidget#buttonsStackedWidget QPushButton {
+    padding: 5px 20px 5px 20px;
 }
 
 QGroupBox#discountGroupBox QPushButton,
 QGroupBox#discountGroupBox QPushButton:flat,
 QGroupBox#discountGroupBox QPushButton:pressed,
-QGroupBox#discountGroupBox QPushButton:checked {
+QGroupBox#discountGroupBox QPushButton:checked,
+QPushButton#proceedPushButton,
+QPushButton#proceedPushButton:flat,
+QPushButton#proceedPushButton:pressed,
+QPushButton#proceedPushButton:checked {
     background-color: transparent;
     border: none;
+}
+
+QGroupBox#productInfoGroupBox {
+    margin-top: 10px;
+}
+
+QListView::item {
+    font-family: Arial;
+    font-size: 16px;
 }

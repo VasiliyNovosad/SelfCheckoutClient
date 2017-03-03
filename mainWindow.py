@@ -257,7 +257,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.imageGoodLabel.setScaledContents(False)
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[0]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
         self.mapGraphicsView.setMovie(None)
-        self.mapGraphicsView.setPixmap(QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+        self.mapGraphicsView.setPixmap(QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                                   self.mapGraphicsView.height(),
                                                                                   Qt.KeepAspectRatio))
 
@@ -268,7 +268,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[1]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
         self.mapGraphicsView.setMovie(None)
         self.mapGraphicsView.setPixmap(
-            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+            QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
 
@@ -279,7 +279,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[2]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
         self.mapGraphicsView.setMovie(None)
         self.mapGraphicsView.setPixmap(
-            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+            QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
 
@@ -290,7 +290,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[3]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
         self.mapGraphicsView.setMovie(None)
         self.mapGraphicsView.setPixmap(
-            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+            QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
 
@@ -301,7 +301,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[4]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
         self.mapGraphicsView.setMovie(None)
         self.mapGraphicsView.setPixmap(
-            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+            QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
 
@@ -312,7 +312,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[5]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
         self.mapGraphicsView.setMovie(None)
         self.mapGraphicsView.setPixmap(
-            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+            QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
 
@@ -323,7 +323,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[6]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
         self.mapGraphicsView.setMovie(None)
         self.mapGraphicsView.setPixmap(
-            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+            QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
 
@@ -334,7 +334,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[7]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
         self.mapGraphicsView.setMovie(None)
         self.mapGraphicsView.setPixmap(
-            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+            QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
 
@@ -345,7 +345,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[8]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
         self.mapGraphicsView.setMovie(None)
         self.mapGraphicsView.setPixmap(
-            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+            QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
 
