@@ -8,8 +8,14 @@
 # WARNING! All changes made in this file will be lost!
 
 from PySide import QtCore, QtGui
-from PySide.QtCore import *
-from PySide.QtGui import *
+from subprocess import call
+
+class MyLineEdit(QtGui.QLineEdit):
+    def __init__(self, parent=None):
+        super(MyLineEdit, self).__init__(parent)
+
+    def focusInEvent(self, e):
+        call(["onboard"])
 
 
 class Ui_MainWindow(object):
@@ -109,7 +115,7 @@ class Ui_MainWindow(object):
         self.mapGraphicsView.setMaximumSize(QtCore.QSize(951, 314))
         self.mapGraphicsView.setText("")
         self.mapGraphicsView.setPixmap(QtGui.QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(), self.mapGraphicsView.height(),
-                                                           Qt.KeepAspectRatio))
+                                                                                                             QtCore.Qt.KeepAspectRatio))
         self.mapGraphicsView.setScaledContents(False)
         self.mapGraphicsView.setAlignment(QtCore.Qt.AlignCenter)
         self.mapGraphicsView.setObjectName("mapGraphicsView")
@@ -540,7 +546,7 @@ class Ui_MainWindow(object):
         self.findProductGroupBox.setObjectName("findProductGroupBox")
         self.verticalLayout_6 = QtGui.QVBoxLayout(self.findProductGroupBox)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
-        self.findLineEdit = QtGui.QLineEdit(self.findProductGroupBox)
+        self.findLineEdit = MyLineEdit(self.findProductGroupBox)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.findLineEdit.setFont(font)
@@ -626,7 +632,7 @@ class Ui_MainWindow(object):
         self.shopingCartLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.shopingCartLabel.setObjectName("shopingCartLabel")
         self.verticalLayout_3.addWidget(self.shopingCartLabel)
-        self.barcodeLineEdit = QtGui.QLineEdit(self.workPage)
+        self.barcodeLineEdit = MyLineEdit(self.workPage)
         self.barcodeLineEdit.setProperty("clearButtonEnabled", False)
         self.barcodeLineEdit.setObjectName("barcodeLineEdit")
         self.verticalLayout_3.addWidget(self.barcodeLineEdit)

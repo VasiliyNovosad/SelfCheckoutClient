@@ -7,7 +7,6 @@ import scanedform_ui
 import requests
 import os
 import cv2
-from subprocess import call
 
 style = os.path.join(os.path.dirname(__file__), 'style.css')
 
@@ -144,6 +143,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.findPushButton.clicked.connect(self.clickFindButton)
         self.delPushButton.clicked.connect(self.clickDelButton)
         self.barcodeLineEdit.editingFinished.connect(self.changeBarcode)
+        # self.barcodeLineEdit.focusInEvent()
         self.shopingCartListWidget.itemClicked.connect(self.showProductInfo)
         self.foundedListWidget.itemClicked.connect(self.showFoundedProductInfo)
         self.discountPushButton1.clicked.connect(self.clickDiscountButton1)
@@ -194,9 +194,6 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def openScannedDialog(self):
         self.scannedDialog = MyDialog(self)
         self.scannedDialog.exec_()
-
-    def setLineEditFocus(self):
-        call(["onboard"])
 
     def clickStartButton(self):
         self.stackedWidget.setCurrentIndex(1)
