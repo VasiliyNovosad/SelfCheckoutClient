@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'scanedForm.ui'
 #
-# Created: Fri Mar 03 01:22:22 2017
+# Created: Fri Mar 03 03:50:03 2017
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -74,8 +74,9 @@ class Ui_Dialog(object):
         self.verticalLayout_4 = QtGui.QVBoxLayout()
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.scanedGoodImageLabel = QtGui.QLabel(self.frame)
-        self.scanedGoodImageLabel.setMinimumSize(QtCore.QSize(0, 280))
+        self.scanedGoodImageLabel.setMinimumSize(QtCore.QSize(600, 300))
         self.scanedGoodImageLabel.setMaximumSize(QtCore.QSize(600, 300))
+        self.scanedGoodImageLabel.setBaseSize(QtCore.QSize(600, 300))
         self.scanedGoodImageLabel.setText("")
         self.scanedGoodImageLabel.setPixmap(QtGui.QPixmap("images/9402-bananas.jpg"))
         self.scanedGoodImageLabel.setScaledContents(False)
