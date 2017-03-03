@@ -4,10 +4,10 @@ from PySide.QtCore import *
 from PySide.QtGui import *
 import selfcheckout_ui
 import scanedform_ui
-import myTouchWidget
 import requests
 import os
 import cv2
+from subprocess import call
 
 style = os.path.join(os.path.dirname(__file__), 'style.css')
 
@@ -39,12 +39,13 @@ class MyDialog(QWidget, scanedform_ui.Ui_Dialog):
 
     def verifiedGood(self, barcode):
         # TODO: add OpenCV frame check
-        return True
+        # return True
         cap = cv2.VideoCapture(0)
         ret, frame = cap.read()
         cap.release()
         cv2.imwrite('images/tmp_frame.jpg', frame)
-        url = 'http://40.68.188.63:10002/upload2/' + str(barcode)
+        # url = 'http://40.68.188.63:10002/upload2/' + str(barcode)
+        url = 'http://localhost:10002/upload2/' + str(barcode)
         files = {'file': open('images/tmp_frame.jpg', 'rb')}
         r = requests.post(url, files=files)
         if r.status_code == 200:
@@ -158,6 +159,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.proceedPushButton.clicked.connect(self.clickProceedButton)
         self.cartPushButton.clicked.connect(self.clickCartButton)
         self.findLineEdit.textChanged.connect(self.foundLineTextEdited)
+        self.goToPushButton.clicked.connect(self.clickGoTo)
         self.getGoods()
         self.discountImageLabel1.setPixmap(
             QPixmap(self.discountGoods[0]['image']).scaled(self.discountImageLabel1.width(), self.discountImageLabel1.height(),
@@ -192,6 +194,9 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def openScannedDialog(self):
         self.scannedDialog = MyDialog(self)
         self.scannedDialog.exec_()
+
+    def setLineEditFocus(self):
+        call(["onboard"])
 
     def clickStartButton(self):
         self.stackedWidget.setCurrentIndex(1)
@@ -254,59 +259,105 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.expirationGoodLabel.setText(self.discountGoods[0]['expiration'])
         self.imageGoodLabel.setScaledContents(False)
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[0]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
+        self.mapGraphicsView.setMovie(None)
+        self.mapGraphicsView.setPixmap(QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+                                                                                  self.mapGraphicsView.height(),
+                                                                                  Qt.KeepAspectRatio))
 
     def clickDiscountButton2(self):
         self.nameGoodLabel.setText(self.discountGoods[1]['name'])
         self.descriptionGoodLabel.setText(self.discountGoods[1]['description'])
         self.expirationGoodLabel.setText(self.discountGoods[1]['expiration'])
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[1]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
+        self.mapGraphicsView.setMovie(None)
+        self.mapGraphicsView.setPixmap(
+            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+                                                                            self.mapGraphicsView.height(),
+                                                                            Qt.KeepAspectRatio))
 
     def clickDiscountButton3(self):
         self.nameGoodLabel.setText(self.discountGoods[2]['name'])
         self.descriptionGoodLabel.setText(self.discountGoods[2]['description'])
         self.expirationGoodLabel.setText(self.discountGoods[2]['expiration'])
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[2]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
+        self.mapGraphicsView.setMovie(None)
+        self.mapGraphicsView.setPixmap(
+            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+                                                                            self.mapGraphicsView.height(),
+                                                                            Qt.KeepAspectRatio))
 
     def clickDiscountButton4(self):
         self.nameGoodLabel.setText(self.discountGoods[3]['name'])
         self.descriptionGoodLabel.setText(self.discountGoods[3]['description'])
         self.expirationGoodLabel.setText(self.discountGoods[3]['expiration'])
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[3]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
+        self.mapGraphicsView.setMovie(None)
+        self.mapGraphicsView.setPixmap(
+            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+                                                                            self.mapGraphicsView.height(),
+                                                                            Qt.KeepAspectRatio))
 
     def clickDiscountButton5(self):
         self.nameGoodLabel.setText(self.discountGoods[4]['name'])
         self.descriptionGoodLabel.setText(self.discountGoods[4]['description'])
         self.expirationGoodLabel.setText(self.discountGoods[4]['expiration'])
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[4]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
+        self.mapGraphicsView.setMovie(None)
+        self.mapGraphicsView.setPixmap(
+            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+                                                                            self.mapGraphicsView.height(),
+                                                                            Qt.KeepAspectRatio))
 
     def clickDiscountButton6(self):
         self.nameGoodLabel.setText(self.discountGoods[5]['name'])
         self.descriptionGoodLabel.setText(self.discountGoods[5]['description'])
         self.expirationGoodLabel.setText(self.discountGoods[5]['expiration'])
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[5]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
+        self.mapGraphicsView.setMovie(None)
+        self.mapGraphicsView.setPixmap(
+            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+                                                                            self.mapGraphicsView.height(),
+                                                                            Qt.KeepAspectRatio))
 
     def clickDiscountButton7(self):
         self.nameGoodLabel.setText(self.discountGoods[6]['name'])
         self.descriptionGoodLabel.setText(self.discountGoods[6]['description'])
         self.expirationGoodLabel.setText(self.discountGoods[6]['expiration'])
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[6]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
+        self.mapGraphicsView.setMovie(None)
+        self.mapGraphicsView.setPixmap(
+            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+                                                                            self.mapGraphicsView.height(),
+                                                                            Qt.KeepAspectRatio))
 
     def clickDiscountButton8(self):
         self.nameGoodLabel.setText(self.discountGoods[7]['name'])
         self.descriptionGoodLabel.setText(self.discountGoods[7]['description'])
         self.expirationGoodLabel.setText(self.discountGoods[7]['expiration'])
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[7]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
+        self.mapGraphicsView.setMovie(None)
+        self.mapGraphicsView.setPixmap(
+            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+                                                                            self.mapGraphicsView.height(),
+                                                                            Qt.KeepAspectRatio))
 
     def clickDiscountButton9(self):
         self.nameGoodLabel.setText(self.discountGoods[8]['name'])
         self.descriptionGoodLabel.setText(self.discountGoods[8]['description'])
         self.expirationGoodLabel.setText(self.discountGoods[8]['expiration'])
         self.imageGoodLabel.setPixmap(QPixmap(self.discountGoods[8]['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio))
+        self.mapGraphicsView.setMovie(None)
+        self.mapGraphicsView.setPixmap(
+            QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
+                                                                            self.mapGraphicsView.height(),
+                                                                            Qt.KeepAspectRatio))
 
     def getGoods(self):
-        response = requests.get('http://40.68.188.63:10002/wares')
-        self.all_goods = response.json()['wares']
-        self.all_goods = [t for t in self.discountGoods if True]
+        # response = requests.get('http://40.68.188.63:10002/wares')
+        # self.all_goods = response.json()['wares']
+        response = requests.get('http://localhost:10002/goods')
+        self.all_goods = response.json()['goods']
+        # self.all_goods = [t for t in self.discountGoods if True]
         self.goods = []
         print(self.all_goods)
 
@@ -361,6 +412,11 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
 
     def foundLineTextEdited(self):
         self.found_goods(self.findLineEdit.text())
+
+    def clickGoTo(self):
+        movie = QMovie("images/Plan Superm_1.gif")
+        self.mapGraphicsView.setMovie(movie)
+        movie.start()
 
     def found_goods(self, found_filter):
         if found_filter == '':

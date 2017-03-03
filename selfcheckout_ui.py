@@ -8,6 +8,9 @@
 # WARNING! All changes made in this file will be lost!
 
 from PySide import QtCore, QtGui
+from PySide.QtCore import *
+from PySide.QtGui import *
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -101,8 +104,14 @@ class Ui_MainWindow(object):
         self.mapGroupBox.setObjectName("mapGroupBox")
         self.horizontalLayout_8 = QtGui.QHBoxLayout(self.mapGroupBox)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
-        self.mapGraphicsView = QtGui.QGraphicsView(self.mapGroupBox)
-        self.mapGraphicsView.setMinimumSize(QtCore.QSize(950, 0))
+        self.mapGraphicsView = QtGui.QLabel(self.mapGroupBox)
+        self.mapGraphicsView.setMinimumSize(QtCore.QSize(951, 314))
+        self.mapGraphicsView.setMaximumSize(QtCore.QSize(951, 314))
+        self.mapGraphicsView.setText("")
+        self.mapGraphicsView.setPixmap(QtGui.QPixmap("images/Plan Superm_1.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(), self.mapGraphicsView.height(),
+                                                           Qt.KeepAspectRatio))
+        self.mapGraphicsView.setScaledContents(False)
+        self.mapGraphicsView.setAlignment(QtCore.Qt.AlignCenter)
         self.mapGraphicsView.setObjectName("mapGraphicsView")
         self.horizontalLayout_8.addWidget(self.mapGraphicsView)
         self.verticalLayout_4.addWidget(self.mapGroupBox)
