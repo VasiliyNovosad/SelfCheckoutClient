@@ -70,7 +70,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             {
                 'image': 'images/9402-bananas.jpg',
                 'name': 'Banana',
-                'description': 'Banana',
+                'description': 'Proteins - 0.9g Fats - 0.1g Carbohydrates - 4.9g (including mono - and bioses - 3g) Food fibers (cellulose) - 1.3g',
                 'expiration': '2 weeks',
                 'price': 2.19,
                 'barcode': '2222'
@@ -94,7 +94,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             {
                 'image': 'images/img-fiche-silver-sardine-huile-vegetale.png',
                 'name': 'Fish Sardine',
-                'description': 'Fish Sardine',
+                'description': 'Calories, kcal: 242 Carbohydrates - 4.9g Fats: 1.0 Carbohydrates: 48.8',
                 'expiration': '1 year',
                 'price': 3.79,
                 'barcode': '5555'
@@ -118,7 +118,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             {
                 'image': 'images/marinated-tomatoes-with-garlic.jpg',
                 'name': 'Tomatoes',
-                'description': 'Tomatoes',
+                'description': 'Caloric content: 18 kcal Carbohydrates - 3.9g Sugars - 2.6g Dietary fiber - 1.2g Fat - 0.2g Protein - 0.9g',
                 'expiration': '2 months',
                 'price': 8.99,
                 'barcode': '8888'
@@ -199,6 +199,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(1)
         self.stackedWidget_2.setCurrentIndex(0)
         self.stackedWidget_3.setCurrentIndex(0)
+        self.barcodeLineEdit.setFocus()
 
     def clickProceedButton(self):
         self.stackedWidget.setCurrentIndex(0)
@@ -378,7 +379,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
                 QPixmap(scanedGood['image']).scaled(self.scannedDialog.scanedGoodImageLabel.width(),
                                                                self.scannedDialog.scanedGoodImageLabel.height(),
                                                                Qt.KeepAspectRatio))
-            self.scannedDialog.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
+            self.scannedDialog.setWindowFlags(Qt.Window | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
             self.scannedDialog.move(400, 400)
             self.scannedDialog.buttonsStackedWidget.setCurrentIndex(0)
             self.scannedDialog.show()

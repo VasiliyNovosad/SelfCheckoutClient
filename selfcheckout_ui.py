@@ -633,7 +633,7 @@ class Ui_MainWindow(object):
         self.shopingCartLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.shopingCartLabel.setObjectName("shopingCartLabel")
         self.verticalLayout_3.addWidget(self.shopingCartLabel)
-        self.barcodeLineEdit = MyLineEdit(self.workPage)
+        self.barcodeLineEdit = QtGui.QLineEdit(self.workPage)
         self.barcodeLineEdit.setProperty("clearButtonEnabled", False)
         self.barcodeLineEdit.setObjectName("barcodeLineEdit")
         self.verticalLayout_3.addWidget(self.barcodeLineEdit)
