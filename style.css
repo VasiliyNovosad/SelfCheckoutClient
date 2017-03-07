@@ -15,8 +15,17 @@ QPushButton#startButton:hover {
                                       stop: 0 #3cb0fd, stop: 1 #3498db);
 }
 
-QStackedWidget#stackedWidget, QGroupBox#discountGroupBox QFrame, QGroupBox#productInfoGroupBox, QMainWindow {
+QStackedWidget#stackedWidget,
+QGroupBox#discountGroupBox QFrame,
+QGroupBox#productInfoGroupBox,
+QMainWindow,
+QWidget#scanGoodWidget,
+QFrame#frame_11 {
     background-color: white;
+}
+
+QFrame#frame_11 {
+    border: solid 1px dimgray;
 }
 
 QStackedWidget#buttonsStackedWidget QPushButton {
@@ -30,7 +39,8 @@ QGroupBox#discountGroupBox QPushButton:checked,
 QPushButton#proceedPushButton,
 QPushButton#proceedPushButton:flat,
 QPushButton#proceedPushButton:pressed,
-QPushButton#proceedPushButton:checked {
+QPushButton#proceedPushButton:checked,
+QWidget#page_2{
     background-color: transparent;
     border: none;
 }

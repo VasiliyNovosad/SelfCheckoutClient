@@ -3,55 +3,55 @@
 from PySide.QtCore import *
 from PySide.QtGui import *
 import selfcheckout_ui
-import scanedform_ui
+# import scanedform_ui
 import requests
 import os
 import cv2
 
 style = os.path.join(os.path.dirname(__file__), 'style.css')
 
-class MyDialog(QWidget, scanedform_ui.Ui_Dialog):
-    def __init__(self, parent_object):
-        super(MyDialog, self).__init__(parent_object)
-        self.scannedGood = None
-        self.setupUi(self)
-        self.cancelPushButton.clicked.connect(self.closeDialog)
-        self.verifyPushButton.clicked.connect(self.verifyGood)
-        self.cancelPushButton2.clicked.connect(self.closeDialog)
-        self.verifyPushButton2.clicked.connect(self.verifyGood)
-        self.cancelPushButton3.clicked.connect(self.closeDialog)
-
-    def closeDialog(self):
-        self.hide()
-
-    def verifyGood(self):
-        if self.scannedGood == None:
-            return
-        barcode = self.scannedGood['barcode']
-        if self.verifiedGood(barcode):
-            self.buttonsStackedWidget.setCurrentIndex(2)
-            self.parent().add_good_to_cart(self.scannedGood)
-            timer = QTimer()
-            timer.singleShot(4000, self.closeDialog)
-
-        else:
-            self.buttonsStackedWidget.setCurrentIndex(1)
-
-    def verifiedGood(self, barcode):
-        # TODO: add OpenCV frame check
-        # return True
-        cap = cv2.VideoCapture(0)
-        ret, frame = cap.read()
-        cap.release()
-        cv2.imwrite('images/tmp_frame.jpg', frame)
-        # url = 'http://40.68.188.63:10002/upload2/' + str(barcode)
-        url = 'http://localhost:10002/upload2/' + str(barcode)
-        files = {'file': open('images/tmp_frame.jpg', 'rb')}
-        r = requests.post(url, files=files)
-        if r.status_code == 200:
-            return True
-        else:
-            return False
+# class MyDialog(QWidget, scanedform_ui.Ui_Dialog):
+#     def __init__(self, parent_object):
+#         super(MyDialog, self).__init__(parent_object)
+#         self.scannedGood = None
+#         self.setupUi(self)
+#         self.cancelPushButton.clicked.connect(self.closeDialog)
+#         self.verifyPushButton.clicked.connect(self.verifyGood)
+#         self.cancelPushButton2.clicked.connect(self.closeDialog)
+#         self.verifyPushButton2.clicked.connect(self.verifyGood)
+#         self.cancelPushButton3.clicked.connect(self.closeDialog)
+#
+#     def closeDialog(self):
+#         self.hide()
+#
+#     def verifyGood(self):
+#         if self.scannedGood == None:
+#             return
+#         barcode = self.scannedGood['barcode']
+#         if self.verifiedGood(barcode):
+#             self.buttonsStackedWidget.setCurrentIndex(2)
+#             self.parent().add_good_to_cart(self.scannedGood)
+#             timer = QTimer()
+#             timer.singleShot(4000, self.closeDialog)
+#
+#         else:
+#             self.buttonsStackedWidget.setCurrentIndex(1)
+#
+#     def verifiedGood(self, barcode):
+#         # TODO: add OpenCV frame check
+#         return True
+#         # cap = cv2.VideoCapture(0)
+#         # ret, frame = cap.read()
+#         # cap.release()
+#         # cv2.imwrite('images/tmp_frame.jpg', frame)
+#         # # url = 'http://40.68.188.63:10002/upload2/' + str(barcode)
+#         # url = 'http://localhost:10002/upload2/' + str(barcode)
+#         # files = {'file': open('images/tmp_frame.jpg', 'rb')}
+#         # r = requests.post(url, files=files)
+#         # if r.status_code == 200:
+#         #     return True
+#         # else:
+#         #     return False
 
 
 class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
@@ -59,6 +59,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         super(MyMainWindow, self).__init__()
         self.goods = []
         self.foundedGoods = []
+        self.scanedGoods = []
         self.discountGoods = [
             {
                 'image': 'images/991.jpg',
@@ -137,8 +138,9 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         # self.barcodeLineEdit.keyboard_type = 'numeric'
         self.setStyleSheet(open(style).read())
         self.stackedWidget.setCurrentIndex(0)
-        self.scannedDialog = MyDialog(self)
-        self.scannedDialog.hide()
+        # self.scannedDialog = MyDialog(self.scanGoodWidget)
+        # self.scannedDialog.hide()
+        self.scanGoodWidget.hide()
 
         self.startButton.clicked.connect(self.clickStartButton)
         self.findPushButton.clicked.connect(self.clickFindButton)
@@ -192,15 +194,54 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.delCartPushButton.clicked.connect(self.activateBarcodeLine)
         self.mapPushButton.clicked.connect(self.activateBarcodeLine)
         self.favoritesPushButton.clicked.connect(self.activateBarcodeLine)
+        self.cancelPushButton.clicked.connect(self.closeDialog)
+        self.verifyPushButton.clicked.connect(self.verifyGood)
+        self.cancelPushButton2.clicked.connect(self.closeDialog)
+        self.verifyPushButton2.clicked.connect(self.verifyGood)
+        self.cancelPushButton3.clicked.connect(self.closeDialog)
         self.centralwidget.showFullScreen()
         # self.showFullScreen()
+
+    def closeDialog(self):
+        self.scanGoodWidget.hide()
+        self.barcodeLineEdit.setFocus()
+
+    def verifyGood(self):
+        if self.scannedGood == None:
+            return
+        barcode = self.scannedGood['barcode']
+        if self.verifiedGood(barcode):
+            self.buttonsStackedWidget.setCurrentIndex(2)
+            self.add_good_to_cart(self.scannedGood)
+            timer = QTimer()
+            timer.singleShot(4000, self.closeDialog)
+
+        else:
+            self.buttonsStackedWidget.setCurrentIndex(1)
+
+    def verifiedGood(self, barcode):
+        # TODO: add OpenCV frame check
+        # return True
+        cap = cv2.VideoCapture(0)
+        ret, frame = cap.read()
+        cap.release()
+        cv2.imwrite('images/tmp_frame.jpg', frame)
+        # url = 'http://40.68.188.63:10002/upload2/' + str(barcode)
+        url = 'http://localhost:10002/upload2/' + str(barcode)
+        files = {'file': open('images/tmp_frame.jpg', 'rb')}
+        r = requests.post(url, files=files)
+        if r.status_code == 200:
+            return True
+        else:
+            return False
+
 
     def activateBarcodeLine(self):
         self.barcodeLineEdit.setFocus()
 
-    def openScannedDialog(self):
-        self.scannedDialog = MyDialog(self)
-        self.scannedDialog.show()
+    # def openScannedDialog(self):
+    #     self.scannedDialog = MyDialog(self)
+    #     self.scannedDialog.show()
 
     def clickStartButton(self):
         self.stackedWidget.setCurrentIndex(1)
@@ -390,19 +431,33 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         selected = [t for t in self.all_goods if t['barcode'] == barcode]
         if len(selected) > 0:
             scanedGood = selected[0]
-            self.scannedDialog.scannedGood = scanedGood
-            self.scannedDialog.scanedGoodNameLabel.setText(scanedGood['name'])
-            self.scannedDialog.scanedGoodPriceLabel.setText(str(scanedGood['price']) + u"€")
-            self.scannedDialog.scanedGoodDescriptionLabel.setText(scanedGood['description'])
-            self.scannedDialog.scanedGoodExpirationLabel.setText(scanedGood['expiration'])
-            self.scannedDialog.scanedGoodImageLabel.setPixmap(
-                QPixmap(scanedGood['image']).scaled(self.scannedDialog.scanedGoodImageLabel.width(),
-                                                               self.scannedDialog.scanedGoodImageLabel.height(),
-                                                               Qt.KeepAspectRatio))
-            self.scannedDialog.setWindowFlags(Qt.Window | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
-            self.scannedDialog.move(400, 400)
-            self.scannedDialog.buttonsStackedWidget.setCurrentIndex(0)
-            self.scannedDialog.show()
+            # self.scannedDialog.scannedGood = scanedGood
+            # self.scannedDialog.scanedGoodNameLabel.setText(scanedGood['name'])
+            # self.scannedDialog.scanedGoodPriceLabel.setText(str(scanedGood['price']) + u"€")
+            # self.scannedDialog.scanedGoodDescriptionLabel.setText(scanedGood['description'])
+            # self.scannedDialog.scanedGoodExpirationLabel.setText(scanedGood['expiration'])
+            # self.scannedDialog.scanedGoodImageLabel.setPixmap(
+            #     QPixmap(scanedGood['image']).scaled(self.scannedDialog.scanedGoodImageLabel.width(),
+            #                                                    self.scannedDialog.scanedGoodImageLabel.height(),
+            #                                                    Qt.KeepAspectRatio))
+            # self.scannedDialog.setWindowFlags(Qt.Window | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+            # # self.scannedDialog.move(170, 100)
+            # self.scannedDialog.buttonsStackedWidget.setCurrentIndex(0)
+            # self.scannedDialog.show()
+
+            self.scannedGood = scanedGood
+            self.scanedGoodNameLabel.setText(scanedGood['name'])
+            self.scanedGoodPriceLabel.setText(str(scanedGood['price']) + u"€")
+            self.scanedGoodDescriptionLabel.setText(scanedGood['description'])
+            self.scanedGoodExpirationLabel.setText(scanedGood['expiration'])
+            self.scanedGoodImageLabel.setPixmap(
+                QPixmap(scanedGood['image']).scaled(self.scanedGoodImageLabel.width(),
+                                                    self.scanedGoodImageLabel.height(),
+                                                    Qt.KeepAspectRatio))
+            # self.scanGoodWidget.setWindowFlags(Qt.Window | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
+            # self.scannedDialog.move(170, 100)
+            self.buttonsStackedWidget.setCurrentIndex(0)
+            self.scanGoodWidget.show()
 
             # self.goods.append(selected[0])
             # self.shopingCartListWidget.addItem(selected[0]['name'])
