@@ -15,7 +15,7 @@ QPushButton#startButton:hover {
                                       stop: 0 #3cb0fd, stop: 1 #3498db);
 }
 
-QStackedWidget#stackedWidget, QGroupBox#discountGroupBox QFrame, QGroupBox#productInfoGroupBox {
+QStackedWidget#stackedWidget, QGroupBox#discountGroupBox QFrame, QGroupBox#productInfoGroupBox, QMainWindow {
     background-color: white;
 }
 

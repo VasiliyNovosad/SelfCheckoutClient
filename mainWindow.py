@@ -32,7 +32,7 @@ class MyDialog(QWidget, scanedform_ui.Ui_Dialog):
             self.buttonsStackedWidget.setCurrentIndex(2)
             self.parent().add_good_to_cart(self.scannedGood)
             timer = QTimer()
-            timer.singleShot(1000, self.closeDialog)
+            timer.singleShot(4000, self.closeDialog)
 
         else:
             self.buttonsStackedWidget.setCurrentIndex(1)
