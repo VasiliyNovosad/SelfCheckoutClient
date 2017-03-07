@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'selfcheckout.ui'
 #
-# Created: Tue Mar  7 15:04:50 2017
+# Created: Tue Mar  7 15:34:15 2017
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -659,6 +659,8 @@ class Ui_MainWindow(object):
         self.shopingCartLabel.setObjectName("shopingCartLabel")
         self.verticalLayout_3.addWidget(self.shopingCartLabel)
         self.barcodeLineEdit = QtGui.QLineEdit(self.workPage)
+        self.barcodeLineEdit.setEnabled(True)
+        self.barcodeLineEdit.setMaximumSize(QtCore.QSize(0, 0))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.barcodeLineEdit.setFont(font)

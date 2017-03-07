@@ -7,7 +7,6 @@ import scanedform_ui
 import requests
 import os
 import cv2
-from time import sleep
 
 style = os.path.join(os.path.dirname(__file__), 'style.css')
 
@@ -147,6 +146,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.barcodeLineEdit.editingFinished.connect(self.changeBarcode)
         self.shopingCartListWidget.itemClicked.connect(self.showProductInfo)
         self.foundedListWidget.itemClicked.connect(self.showFoundedProductInfo)
+        self.shopingCartListWidget.clicked.connect(self.activateBarcodeLine)
         self.discountPushButton1.clicked.connect(self.clickDiscountButton1)
         self.discountPushButton2.clicked.connect(self.clickDiscountButton2)
         self.discountPushButton3.clicked.connect(self.clickDiscountButton3)
@@ -156,7 +156,6 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.discountPushButton7.clicked.connect(self.clickDiscountButton7)
         self.discountPushButton8.clicked.connect(self.clickDiscountButton8)
         self.discountPushButton9.clicked.connect(self.clickDiscountButton9)
-        self.favoritesPushButton.clicked.connect(self.openScannedDialog)
         self.proceedPushButton.clicked.connect(self.clickProceedButton)
         self.cartPushButton.clicked.connect(self.clickCartButton)
         self.findLineEdit.textChanged.connect(self.foundLineTextEdited)
@@ -189,8 +188,15 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.discountImageLabel9.setPixmap(
             QPixmap(self.discountGoods[8]['image']).scaled(self.discountImageLabel9.width(), self.discountImageLabel9.height(),
                                                            Qt.KeepAspectRatio))
+        self.addFavPushButton.clicked.connect(self.activateBarcodeLine)
+        self.delCartPushButton.clicked.connect(self.activateBarcodeLine)
+        self.mapPushButton.clicked.connect(self.activateBarcodeLine)
+        self.favoritesPushButton.clicked.connect(self.activateBarcodeLine)
         self.centralwidget.showFullScreen()
         # self.showFullScreen()
+
+    def activateBarcodeLine(self):
+        self.barcodeLineEdit.setFocus()
 
     def openScannedDialog(self):
         self.scannedDialog = MyDialog(self)
@@ -216,6 +222,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             self.stackedWidget_2.setCurrentIndex(1)
         else:
             self.stackedWidget_2.setCurrentIndex(0)
+            self.barcodeLineEdit.setFocus()
 
     def clickDelButton(self):
         selected_item = self.shopingCartListWidget.currentRow()
@@ -241,6 +248,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             self.expirationGoodLabel.setText('Until ' + selected_item['expiration'])
             img = QPixmap(selected_item['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(), Qt.KeepAspectRatio)
             self.imageGoodLabel.setPixmap(img)
+        self.barcodeLineEdit.setFocus()
 
     def showFoundedProductInfo(self):
         selected_index = self.foundedListWidget.currentRow()
@@ -252,6 +260,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             img = QPixmap(selected_item['image']).scaled(self.imageGoodLabel.width(), self.imageGoodLabel.height(),
                                                          Qt.KeepAspectRatio)
             self.imageGoodLabel.setPixmap(img)
+        self.barcodeLineEdit.setFocus()
 
     def clickDiscountButton1(self):
         self.nameGoodLabel.setText(self.discountGoods[0]['name'])
@@ -263,6 +272,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.mapGraphicsView.setPixmap(QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                                   self.mapGraphicsView.height(),
                                                                                   Qt.KeepAspectRatio))
+        self.barcodeLineEdit.setFocus()
 
     def clickDiscountButton2(self):
         self.nameGoodLabel.setText(self.discountGoods[1]['name'])
@@ -274,6 +284,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
+        self.barcodeLineEdit.setFocus()
 
     def clickDiscountButton3(self):
         self.nameGoodLabel.setText(self.discountGoods[2]['name'])
@@ -285,6 +296,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
+        self.barcodeLineEdit.setFocus()
 
     def clickDiscountButton4(self):
         self.nameGoodLabel.setText(self.discountGoods[3]['name'])
@@ -296,6 +308,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
+        self.barcodeLineEdit.setFocus()
 
     def clickDiscountButton5(self):
         self.nameGoodLabel.setText(self.discountGoods[4]['name'])
@@ -307,6 +320,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
+        self.barcodeLineEdit.setFocus()
 
     def clickDiscountButton6(self):
         self.nameGoodLabel.setText(self.discountGoods[5]['name'])
@@ -318,6 +332,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
+        self.barcodeLineEdit.setFocus()
 
     def clickDiscountButton7(self):
         self.nameGoodLabel.setText(self.discountGoods[6]['name'])
@@ -329,6 +344,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
+        self.barcodeLineEdit.setFocus()
 
     def clickDiscountButton8(self):
         self.nameGoodLabel.setText(self.discountGoods[7]['name'])
@@ -340,6 +356,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
+        self.barcodeLineEdit.setFocus()
 
     def clickDiscountButton9(self):
         self.nameGoodLabel.setText(self.discountGoods[8]['name'])
@@ -351,6 +368,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             QPixmap("images/Plan Superm 3.00_00_00_00.Still001.png").scaled(self.mapGraphicsView.width(),
                                                                             self.mapGraphicsView.height(),
                                                                             Qt.KeepAspectRatio))
+        self.barcodeLineEdit.setFocus()
 
     def getGoods(self):
         # response = requests.get('http://40.68.188.63:10002/wares')
@@ -417,6 +435,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         movie = QMovie("images/Plan Superm_1.gif")
         self.mapGraphicsView.setMovie(movie)
         movie.start()
+        self.barcodeLineEdit.setFocus()
 
     def found_goods(self, found_filter):
         if found_filter == '':
