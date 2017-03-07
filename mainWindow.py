@@ -7,6 +7,7 @@ import scanedform_ui
 import requests
 import os
 import cv2
+from time import sleep
 
 style = os.path.join(os.path.dirname(__file__), 'style.css')
 
@@ -30,8 +31,9 @@ class MyDialog(QWidget, scanedform_ui.Ui_Dialog):
         barcode = self.scannedGood['barcode']
         if self.verifiedGood(barcode):
             self.buttonsStackedWidget.setCurrentIndex(2)
-
             self.parent().add_good_to_cart(self.scannedGood)
+            timer = QTimer()
+            timer.singleShot(1000, self.closeDialog)
 
         else:
             self.buttonsStackedWidget.setCurrentIndex(1)
@@ -143,7 +145,6 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.findPushButton.clicked.connect(self.clickFindButton)
         self.delPushButton.clicked.connect(self.clickDelButton)
         self.barcodeLineEdit.editingFinished.connect(self.changeBarcode)
-        # self.barcodeLineEdit.focusInEvent()
         self.shopingCartListWidget.itemClicked.connect(self.showProductInfo)
         self.foundedListWidget.itemClicked.connect(self.showFoundedProductInfo)
         self.discountPushButton1.clicked.connect(self.clickDiscountButton1)
@@ -193,7 +194,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
 
     def openScannedDialog(self):
         self.scannedDialog = MyDialog(self)
-        self.scannedDialog.exec_()
+        self.scannedDialog.show()
 
     def clickStartButton(self):
         self.stackedWidget.setCurrentIndex(1)
@@ -223,6 +224,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             item = None
             self.goods.pop(selected_item)
         self.updateTotal()
+        self.barcodeLineEdit.setFocus()
 
     def updateTotal(self):
         total = 0

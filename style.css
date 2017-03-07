@@ -34,12 +34,3 @@ QPushButton#proceedPushButton:checked {
     background-color: transparent;
     border: none;
 }
-
-QGroupBox#productInfoGroupBox {
-    margin-top: 10px;
-}
-
-QListView::item {
-    font-family: Arial;
-    font-size: 16px;
-}

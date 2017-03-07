@@ -147,7 +147,7 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(QtGui.QApplication.translate("Dialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
         self.verifyPushButton.setText(QtGui.QApplication.translate("Dialog", "Put into Cart to Verify", None, QtGui.QApplication.UnicodeUTF8))
         self.cancelPushButton.setText(QtGui.QApplication.translate("Dialog", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
-        self.verifyPushButton2.setText(QtGui.QApplication.translate("Dialog", "Not Verified, Try Once", None, QtGui.QApplication.UnicodeUTF8))
+        self.verifyPushButton2.setText(QtGui.QApplication.translate("Dialog", "Not Verified, Try Again", None, QtGui.QApplication.UnicodeUTF8))
         self.cancelPushButton2.setText(QtGui.QApplication.translate("Dialog", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
         self.cancelPushButton3.setText(QtGui.QApplication.translate("Dialog", "Verified", None, QtGui.QApplication.UnicodeUTF8))
         self.scanedGoodNameLabel.setText(QtGui.QApplication.translate("Dialog", "Coca-cola 0.5L", None, QtGui.QApplication.UnicodeUTF8))
