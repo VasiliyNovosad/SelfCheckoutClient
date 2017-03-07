@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'selfcheckout.ui'
 #
-# Created: Tue Mar  7 14:49:39 2017
+# Created: Tue Mar  7 15:04:50 2017
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,9 +17,6 @@ class MyLineEdit(QtGui.QLineEdit):
 
     def focusInEvent(self, e):
         call(["onboard"])
-
-    def focusOutEvent(self, e):
-        self.workPage.setFocusPolicy(QtCore.Qt.StrongFocus)
 
 
 class Ui_MainWindow(object):
@@ -134,7 +131,10 @@ class Ui_MainWindow(object):
         self.productInfoGroupBox.setMinimumSize(QtCore.QSize(455, 0))
         self.productInfoGroupBox.setMaximumSize(QtCore.QSize(455, 16777215))
         font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(16)
+        font.setWeight(75)
+        font.setBold(True)
         self.productInfoGroupBox.setFont(font)
         self.productInfoGroupBox.setAlignment(QtCore.Qt.AlignCenter)
         self.productInfoGroupBox.setObjectName("productInfoGroupBox")
@@ -212,7 +212,10 @@ class Ui_MainWindow(object):
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.discountGroupBox = QtGui.QGroupBox(self.discountPage)
         font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(16)
+        font.setWeight(75)
+        font.setBold(True)
         self.discountGroupBox.setFont(font)
         self.discountGroupBox.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
         self.discountGroupBox.setObjectName("discountGroupBox")
@@ -554,13 +557,19 @@ class Ui_MainWindow(object):
         self.findProductPage = QtGui.QWidget()
         self.findProductPage.setObjectName("findProductPage")
         self.verticalLayout = QtGui.QVBoxLayout(self.findProductPage)
+        self.verticalLayout.setContentsMargins(-1, 0, -1, -1)
         self.verticalLayout.setObjectName("verticalLayout")
         self.findProductGroupBox = QtGui.QGroupBox(self.findProductPage)
         font = QtGui.QFont()
+        font.setFamily("Arial")
         font.setPointSize(16)
+        font.setWeight(75)
+        font.setBold(True)
         self.findProductGroupBox.setFont(font)
+        self.findProductGroupBox.setAlignment(QtCore.Qt.AlignCenter)
         self.findProductGroupBox.setObjectName("findProductGroupBox")
         self.verticalLayout_6 = QtGui.QVBoxLayout(self.findProductGroupBox)
+        self.verticalLayout_6.setContentsMargins(0, 9, -1, -1)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.findLineEdit = MyLineEdit(self.findProductGroupBox)
         font = QtGui.QFont()
@@ -650,6 +659,10 @@ class Ui_MainWindow(object):
         self.shopingCartLabel.setObjectName("shopingCartLabel")
         self.verticalLayout_3.addWidget(self.shopingCartLabel)
         self.barcodeLineEdit = QtGui.QLineEdit(self.workPage)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.barcodeLineEdit.setFont(font)
+        self.barcodeLineEdit.setInputMethodHints(QtCore.Qt.ImhDigitsOnly)
         self.barcodeLineEdit.setProperty("clearButtonEnabled", False)
         self.barcodeLineEdit.setObjectName("barcodeLineEdit")
         self.verticalLayout_3.addWidget(self.barcodeLineEdit)

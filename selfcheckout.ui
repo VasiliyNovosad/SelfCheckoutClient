@@ -268,7 +268,10 @@
                    </property>
                    <property name="font">
                     <font>
+                     <family>Arial</family>
                      <pointsize>16</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
                     </font>
                    </property>
                    <property name="title">
@@ -453,7 +456,10 @@ From Cart</string>
                       <widget class="QGroupBox" name="discountGroupBox">
                        <property name="font">
                         <font>
+                         <family>Arial</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
+                         <bold>true</bold>
                         </font>
                        </property>
                        <property name="title">
@@ -1435,17 +1441,32 @@ From Cart</string>
                    </widget>
                    <widget class="QWidget" name="findProductPage">
                     <layout class="QVBoxLayout" name="verticalLayout">
+                     <property name="topMargin">
+                      <number>0</number>
+                     </property>
                      <item>
                       <widget class="QGroupBox" name="findProductGroupBox">
                        <property name="font">
                         <font>
+                         <family>Arial</family>
                          <pointsize>16</pointsize>
+                         <weight>75</weight>
+                         <bold>true</bold>
                         </font>
                        </property>
                        <property name="title">
                         <string>Find Product</string>
                        </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                       </property>
                        <layout class="QVBoxLayout" name="verticalLayout_6">
+                        <property name="leftMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>9</number>
+                        </property>
                         <item>
                          <widget class="QLineEdit" name="findLineEdit">
                           <property name="font">
@@ -1628,6 +1649,14 @@ Your Credit Card</string>
             </item>
             <item>
              <widget class="QLineEdit" name="barcodeLineEdit">
+              <property name="font">
+               <font>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+              <property name="inputMethodHints">
+               <set>Qt::ImhDigitsOnly</set>
+              </property>
               <property name="placeholderText">
                <string>Insert barcode here..</string>
               </property>
