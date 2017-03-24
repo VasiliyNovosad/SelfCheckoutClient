@@ -15,6 +15,16 @@ QPushButton#startButton:hover {
                                       stop: 0 #3cb0fd, stop: 1 #3498db);
 }
 
+QPushButton#verifyPushButton2 {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #db3230, stop: 1 #b92f23);
+}
+
+QPushButton#cancelPushButton3 {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #78db6a, stop: 1 #45b93e);
+}
+
 QStackedWidget#stackedWidget,
 QGroupBox#discountGroupBox QFrame,
 QGroupBox#productInfoGroupBox,

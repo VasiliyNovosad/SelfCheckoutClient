@@ -1,0 +1,64 @@
+{
+  "goods": [
+    {
+      "barcode": "4820023740501", 
+      "description": "Napkins, 100% cellulose, expiration date is unlimited", 
+      "expiration": "unlimited", 
+      "id": 1, 
+      "image": "1/1.JPG",
+      "name": "Napkins Ruta 100 pcs yellow", 
+      "price": 5.79, 
+      "uri": "http://localhost:10002/goods/1"
+    }, 
+    {
+      "barcode": "4820023743939", 
+      "description": "Paper towels, 100% cellulose, expiration date is unlimited", 
+      "expiration": "unlimited", 
+      "id": 2, 
+      "image": "2/1.JPG",
+      "name": "Paper towels", 
+      "price": 7.29, 
+      "uri": "http://localhost:10002/goods/2"
+    }, 
+    {
+      "barcode": "4823006710287", 
+      "description": "Chocolate Esmeralda, Bisquits with chocolate coating drops", 
+      "expiration": "see on the package", 
+      "id": 3, 
+      "image": "3/1.JPG",
+      "name": "Chocolate Esmeralda Roshen 150g", 
+      "price": 3.99, 
+      "uri": "http://localhost:10002/goods/3"
+    }, 
+    {
+      "barcode": "4823077614569", 
+      "description": "Wafers Krock Bisquits with nut cream", 
+      "expiration": "see on the package", 
+      "id": 4, 
+      "image": "4/1.JPG",
+      "name": "Krock wafers Roshen 40g", 
+      "price": 6.99, 
+      "uri": "http://localhost:10002/goods/4"
+    }, 
+    {
+      "barcode": "4823077613234", 
+      "description": "Fine Milk Chocolate", 
+      "expiration": "1 year", 
+      "id": 5, 
+      "image": "5/1.JPG",
+      "name": "Fine Milk Chocolate Roshen 90g", 
+      "price": 4.99, 
+      "uri": "http://localhost:10002/goods/5"
+    }, 
+    {
+      "barcode": "5900951020940", 
+      "description": "Milky Way 2", 
+      "expiration": "1 year", 
+      "id": 6, 
+      "image": "6/1.JPG",
+      "name": "Milky Way 2 43g", 
+      "price": 1.49, 
+      "uri": "http://localhost:10002/goods/6"
+    }
+  ]
+}

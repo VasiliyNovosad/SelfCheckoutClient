@@ -8,6 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PySide import QtCore, QtGui
+from PySide.phonon import *
 from subprocess import call
 
 
@@ -567,6 +568,15 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.findProductGroupBox)
         self.stackedWidget_2.addWidget(self.findProductPage)
         self.horizontalLayout_3.addWidget(self.stackedWidget_2)
+
+        self.videoframe = QtGui.QFrame(self.page)
+        self.videoframe.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.videoframe.setFrameShadow(QtGui.QFrame.Raised)
+        self.videoframe.setGeometry(QtCore.QRect(1, 1, 977, 355))
+        self.videoframe.setMinimumSize(QtCore.QSize(977, 355))
+        self.videoframe.setMaximumSize(QtCore.QSize(977, 355))
+        self.videoframe.setObjectName("videoframe")
+
         self.mapGroupBox = QtGui.QGroupBox(self.page)
         self.mapGroupBox.setGeometry(QtCore.QRect(1, 1, 977, 355))
         self.mapGroupBox.setMinimumSize(QtCore.QSize(977, 355))

@@ -2,11 +2,15 @@
 
 from PySide.QtCore import *
 from PySide.QtGui import *
+from PySide.phonon import *
 import selfcheckout_ui
 # import scanedform_ui
 import requests
 import os
 import cv2
+import numpy as np
+import json
+import vlc
 
 style = os.path.join(os.path.dirname(__file__), 'style.css')
 
@@ -57,6 +61,8 @@ style = os.path.join(os.path.dirname(__file__), 'style.css')
 class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def __init__(self):
         super(MyMainWindow, self).__init__()
+        self.instance = vlc.Instance()
+        self.mediaplayer = self.instance.media_player_new()
         self.goods = []
         self.foundedGoods = []
         self.scanedGoods = []
@@ -199,6 +205,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.cancelPushButton2.clicked.connect(self.closeDialog)
         self.verifyPushButton2.clicked.connect(self.verifyGood)
         self.cancelPushButton3.clicked.connect(self.closeDialog)
+        self.addFavPushButton.clicked.connect(self.clickAddToFavButton)
         self.centralwidget.showFullScreen()
         # self.showFullScreen()
 
@@ -222,19 +229,85 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def verifiedGood(self, barcode):
         # TODO: add OpenCV frame check
         # return True
-        cap = cv2.VideoCapture(0)
-        ret, frame = cap.read()
-        cap.release()
-        cv2.imwrite('images/tmp_frame.jpg', frame)
-        # url = 'http://40.68.188.63:10002/upload2/' + str(barcode)
-        url = 'http://localhost:10002/upload2/' + str(barcode)
-        files = {'file': open('images/tmp_frame.jpg', 'rb')}
-        r = requests.post(url, files=files)
-        if r.status_code == 200:
-            return True
+        # cap = cv2.VideoCapture(0)
+        # ret, frame = cap.read()
+        # cap.release()
+        # cv2.imwrite('images/tmp_frame.jpg', frame)
+        # # url = 'http://40.68.188.63:10002/upload2/' + str(barcode)
+        # url = 'http://localhost:10002/upload2/' + str(barcode)
+        # files = {'file': open('images/tmp_frame.jpg', 'rb')}
+        # r = requests.post(url, files=files)
+        # if r.status_code == 200:
+        #     return True
+        # else:
+        #     return False
+        return self.checkGood(barcode, 'test_image.jpg')
+        # return self.checkGood(barcode, 'test_image.jpg')
+
+    def checkGood(self, barcode, scaned_image):
+        selected = [t for t in self.all_goods if t['barcode'] == barcode]
+        if len(selected) > 0:
+            good1 = selected[0]
+            basedir = os.path.abspath(os.path.dirname(__file__))
+            good_dir = basedir + '/upload/goods/' + str(good1['id'])
+            if not os.path.isdir(good_dir):
+                return False
+            images = os.listdir(good_dir)
+            if len(images) == 0:
+                return False
+
+            uploaded_img = cv2.imread(os.path.join(basedir + '/upload', scaned_image), 1)  # trainImage
+
+            # Initiate SIFT detector
+            sift = cv2.BRISK_create()
+            bf = cv2.BFMatcher(cv2.NORM_HAMMING, True)
+            kp3, des3 = sift.detectAndCompute(uploaded_img, None)
+            MIN_MATCH_COUNT = 15
+            i = 0
+            for image in images:
+                i += 1
+                print os.path.join(good_dir, image)
+                good_image = cv2.imread(os.path.join(good_dir, image), 1)  # queryImage
+                kp1, des1 = sift.detectAndCompute(good_image, None)
+                matches = bf.match(des1, des3)
+
+                good = sorted(matches, key=lambda x: x.distance)[:40]
+                if len(good) >= MIN_MATCH_COUNT:
+                    src_pts = np.float32([kp1[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
+                    dst_pts = np.float32([kp3[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
+
+                    m, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
+                    matchesMask = mask.ravel().tolist()
+                    if len([x for x in matchesMask if x == 1]) >= MIN_MATCH_COUNT:
+                        h, w, i = good_image.shape
+                        pts = np.float32([[0, 0], [0, h - 1], [w - 1, h - 1], [w - 1, 0]]).reshape(-1, 1, 2)
+                        dst = cv2.perspectiveTransform(pts, m)
+
+                        area = cv2.contourArea(dst)
+                        area_full = uploaded_img.shape[0] * uploaded_img.shape[1]
+                        result_image = cv2.polylines(uploaded_img, [np.int32(dst)], True, 255, 3, cv2.LINE_AA)
+                        draw_params = dict(matchColor=(0, 255, 0),  # draw matches in green color
+                                           singlePointColor=None,
+                                           matchesMask=matchesMask,  # draw only inliers
+                                           flags=2)
+                        result_image = cv2.drawMatches(good_image, kp1, result_image, kp3, good, None, **draw_params)
+                        cv2.imwrite('result_image' + str(i) + '.jpg', result_image)
+
+                        if area * 250 > area_full:
+                            return True
+                    else:
+                        draw_params = dict(matchColor=(0, 255, 0),  # draw matches in green color
+                                           singlePointColor=None,
+                                           matchesMask=matchesMask,  # draw only inliers
+                                           flags=2)
+                        result_image = cv2.drawMatches(good_image, kp1, uploaded_img, kp3, good, None, **draw_params)
+                        cv2.imwrite('result_image' + str(i) + '.jpg', result_image)
+                else:
+                    print "Not enough matches are found - %d/%d" % (len(good), MIN_MATCH_COUNT)
+
+            return False
         else:
             return False
-
 
     def activateBarcodeLine(self):
         self.barcodeLineEdit.setFocus()
@@ -414,8 +487,13 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def getGoods(self):
         # response = requests.get('http://40.68.188.63:10002/wares')
         # self.all_goods = response.json()['wares']
-        response = requests.get('http://localhost:10002/goods')
-        self.all_goods = response.json()['goods']
+        # response = requests.get('http://localhost:10002/goods')
+        # self.all_goods = response.json()['goods']
+        basedir = os.path.abspath(os.path.dirname(__file__))
+        url = basedir + '/upload/goods.json'
+        data_file = open(url)
+        self.all_goods = json.load(data_file)['goods']
+        data_file.close()
         # self.all_goods = [t for t in self.discountGoods if True]
         self.goods = []
         print(self.all_goods)
@@ -450,8 +528,9 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
             self.scanedGoodPriceLabel.setText(str(scanedGood['price']) + u"€")
             self.scanedGoodDescriptionLabel.setText(scanedGood['description'])
             self.scanedGoodExpirationLabel.setText(scanedGood['expiration'])
+            basedir = os.path.abspath(os.path.dirname(__file__))
             self.scanedGoodImageLabel.setPixmap(
-                QPixmap(scanedGood['image']).scaled(self.scanedGoodImageLabel.width(),
+                QPixmap(basedir + '/upload/goods/' + scanedGood['image']).scaled(self.scanedGoodImageLabel.width(),
                                                     self.scanedGoodImageLabel.height(),
                                                     Qt.KeepAspectRatio))
             # self.scanGoodWidget.setWindowFlags(Qt.Window | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
@@ -491,6 +570,14 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.mapGraphicsView.setMovie(movie)
         movie.start()
         self.barcodeLineEdit.setFocus()
+
+    def clickAddToFavButton(self):
+        self.mapGroupBox.hide()
+        self.media = self.instance.media_new(unicode("/home/vnovosad/Downloads/video1.mp4"))
+        self.mediaplayer.set_media(self.media)
+        self.media.parse()
+        self.mediaplayer.set_xwindow(self.videoframe.winId())
+        self.mediaplayer.play()
 
     def found_goods(self, found_filter):
         if found_filter == '':
