@@ -2,7 +2,6 @@
 
 from PySide.QtCore import *
 from PySide.QtGui import *
-from PySide.phonon import *
 import selfcheckout_ui
 # import scanedform_ui
 import requests
@@ -578,6 +577,12 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         self.media.parse()
         self.mediaplayer.set_xwindow(self.videoframe.winId())
         self.mediaplayer.play()
+        self.timer = QTimer(self)
+        self.timer.setInterval(1000)
+        self.connect(self.timer, SIGNAL("timeout()"),
+                     self.stopVideo)
+        self.timer.start()
+        self.barcodeLineEdit.setFocus()
 
     def found_goods(self, found_filter):
         if found_filter == '':
@@ -591,6 +596,12 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
                 itm.setIcon(QIcon(good['image']))
                 self.foundedListWidget.addItem(itm)
 
+    def stopVideo(self):
+        if not self.mediaplayer.is_playing():
+            self.mediaplayer.stop()
+            self.mapGroupBox.show()
+            self.timer.stop()
+            self.barcodeLineEdit.setFocus()
 
 if __name__ == '__main__':
     app = QApplication([])
