@@ -228,11 +228,11 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
     def verifiedGood(self, barcode):
         # TODO: add OpenCV frame check
         # return True
-        # cap = cv2.VideoCapture(0)
-        # ret, frame = cap.read()
-        # cap.release()
-        # cv2.imwrite('images/tmp_frame.jpg', frame)
-        # # url = 'http://40.68.188.63:10002/upload2/' + str(barcode)
+        cap = cv2.VideoCapture(0)
+        ret, frame = cap.read()
+        cap.release()
+        cv2.imwrite('upload/scaned_frame.jpg', frame)
+        # url = 'http://40.68.188.63:10002/upload2/' + str(barcode)
         # url = 'http://localhost:10002/upload2/' + str(barcode)
         # files = {'file': open('images/tmp_frame.jpg', 'rb')}
         # r = requests.post(url, files=files)
@@ -240,7 +240,7 @@ class MyMainWindow(QMainWindow, selfcheckout_ui.Ui_MainWindow):
         #     return True
         # else:
         #     return False
-        return self.checkGood(barcode, 'test_image.jpg')
+        return self.checkGood(barcode, 'scaned_frame.jpg')
         # return self.checkGood(barcode, 'test_image.jpg')
 
     def checkGood(self, barcode, scaned_image):

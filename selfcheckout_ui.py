@@ -8,7 +8,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PySide import QtCore, QtGui
-from PySide.phonon import *
+# from PySide.phonon import *
 from subprocess import call
 
 

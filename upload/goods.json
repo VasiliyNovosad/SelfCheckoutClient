@@ -59,6 +59,26 @@
       "name": "Milky Way 2 43g", 
       "price": 1.49, 
       "uri": "http://localhost:10002/goods/6"
+    },
+    {
+      "barcode": "7622210308122",
+      "description": "Milka",
+      "expiration": "1 year",
+      "id": 7,
+      "image": "7/1.JPG",
+      "name": "Milka 90g",
+      "price": 2.49,
+      "uri": "http://localhost:10002/goods/7"
+    },
+    {
+      "barcode": "4823088701920",
+      "description": "Peanuts roasted salted to beer",
+      "expiration": "1 year",
+      "id": 8,
+      "image": "8/1.JPG",
+      "name": "Peanuts roasted 50g",
+      "price": 1.49,
+      "uri": "http://localhost:10002/goods/8"
     }
   ]
 }
